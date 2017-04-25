@@ -1,4 +1,4 @@
-package util;
+package com.sdi.client.model.util;
 
 public enum UserStatus {
 

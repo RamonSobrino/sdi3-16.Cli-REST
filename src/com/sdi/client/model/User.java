@@ -1,4 +1,4 @@
-package client;
+package com.sdi.client.model;
 
 
 import java.io.Serializable;
@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import util.BusinessException;
-import util.UserStatus;
+import com.sdi.client.model.util.BusinessException;
+import com.sdi.client.model.util.UserStatus;
 
 /**
  * An implementation of the DTO pattern

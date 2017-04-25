@@ -1,4 +1,4 @@
-package util;
+package com.sdi.client.model.util;
 
 public class BusinessException extends Exception {
 	private static final long serialVersionUID = 4001710687990554589L;

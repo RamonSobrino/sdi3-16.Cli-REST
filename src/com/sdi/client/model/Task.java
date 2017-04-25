@@ -1,4 +1,4 @@
-package client;
+package com.sdi.client.model;
 
 
 import java.io.Serializable;
@@ -103,23 +103,6 @@ public class Task implements Comparable<Task>, Serializable {
 	public Task setUserId(Long user_id) {
 		this.userId = user_id;
 		return this;
-	}
-
-	public boolean isLate() {
-		if (planned != null) {
-			// return planned.before(new Date());
-			return DateUtil.diffDays(new Date(), this.planned) > 0;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean isFinish() {
-		if (finished != null) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	@Override
