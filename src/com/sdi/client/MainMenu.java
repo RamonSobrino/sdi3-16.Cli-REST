@@ -5,11 +5,14 @@ import com.sdi.client.actions.NuevaTareaAction;
 import com.sdi.client.actions.VistaCategoriasAction;
 import com.sdi.client.actions.VistaTareasCategoriaAction;
 
+import alb.util.console.Console;
 import alb.util.menu.BaseMenu;
 
 public class MainMenu extends BaseMenu{
 	
 	public final static String REST_SERVICE_URL = "http://localhost:8280/sdi2-16WEB/rest/UserServicesRest";
+	public static String user;
+	public static String password;
 	
 	public MainMenu() {
 		menuOptions = new Object[][] {
@@ -23,6 +26,8 @@ public class MainMenu extends BaseMenu{
 	}
 
 	public static void main(String[] args) {
+		user = Console.readString("User");
+		password = Console.readString("Password");
 		new MainMenu().execute();
 	}
 }

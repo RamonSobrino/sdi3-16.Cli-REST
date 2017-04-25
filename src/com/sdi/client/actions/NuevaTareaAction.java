@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 
 import com.sdi.client.MainMenu;
 import com.sdi.client.model.Task;
+import com.sdi.client.util.Authenticator;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
@@ -25,9 +26,6 @@ public class NuevaTareaAction implements Action{
 		}
 		toCreate.setTitle(title);
 		
-		//TODO: esto hay que cambiarlo por el login, en el propio servidor
-		toCreate.setUserId(153l);
-		
 		toCreate.setCreated(new Date());
 		
 		Long idCat = Console.readLong("Id categoria (Blanco para sin categoria)");
@@ -38,12 +36,9 @@ public class NuevaTareaAction implements Action{
 		
 		
 		Response rs = ClientBuilder.newClient()
-				// .register( new Authenticator("sdi", "password") )
+				.register( new Authenticator(MainMenu.user, MainMenu.password) )
 				.target(MainMenu.REST_SERVICE_URL).request()
 				.post(Entity.entity(toCreate, MediaType.APPLICATION_JSON));
-	
-		
-		System.out.println(rs.getStatusInfo().getStatusCode());
 		
 		if(rs.getStatus() != 204){
 			Console.println("Error al actualizar");

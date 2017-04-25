@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.sdi.client.MainMenu;
 import com.sdi.client.model.Task;
+import com.sdi.client.util.Authenticator;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
@@ -16,7 +17,6 @@ public class VistaTareasCategoriaAction implements Action {
 
 	@Override
 	public void execute() throws Exception {
-		// TODO: cuando exista autentificacion no poner esto
 		Long id = Console.readLong("Id categoria");
 
 		GenericType<List<Task>> listm = new GenericType<List<Task>>() {
@@ -24,7 +24,7 @@ public class VistaTareasCategoriaAction implements Action {
 
 		List<Task> tasks = ClientBuilder
 				.newClient()
-				// .register( new Authenticator("sdi", "password") )
+				.register( new Authenticator(MainMenu.user, MainMenu.password ))
 				.target(MainMenu.REST_SERVICE_URL)
 				.path("cat/" + id.toString()).request()
 				.accept(MediaType.APPLICATION_XML).get().readEntity(listm);

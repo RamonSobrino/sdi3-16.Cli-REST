@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
 
 import com.sdi.client.MainMenu;
 import com.sdi.client.model.Task;
+import com.sdi.client.util.Authenticator;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
@@ -20,11 +21,9 @@ public class MarcarCompletadaAction implements Action {
 		toUpdate.setId(id);
 
 		Response rs = ClientBuilder.newClient()
-				// .register( new Authenticator("sdi", "password") )
+				.register( new Authenticator(MainMenu.user, MainMenu.password) )
 				.target(MainMenu.REST_SERVICE_URL).request()
 				.put(Entity.entity(toUpdate, MediaType.APPLICATION_JSON));
-	
-		System.out.println(rs.getStatusInfo().getStatusCode());
 		
 		if(rs.getStatus() >= 300 ){
 			Console.println("Error al actualizar");

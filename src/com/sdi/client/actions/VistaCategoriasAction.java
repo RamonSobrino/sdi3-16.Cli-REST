@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.sdi.client.MainMenu;
 import com.sdi.client.model.Category;
+import com.sdi.client.util.Authenticator;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
@@ -16,16 +17,15 @@ public class VistaCategoriasAction implements Action {
 
 	@Override
 	public void execute() throws Exception {
-		// TODO: cuando exista autentificacion no poner esto
-		Long id = Console.readLong("Id usuario");
+
 
 		GenericType<List<Category>> listm = new GenericType<List<Category>>() {
 		};
 
 		List<Category> cats = ClientBuilder
 				.newClient()
-				// .register( new Authenticator("sdi", "password") )
-				.target(MainMenu.REST_SERVICE_URL).path("userCats/"+id.toString())
+				.register( new Authenticator(MainMenu.user, MainMenu.password) )
+				.target(MainMenu.REST_SERVICE_URL).path("userCats/")
 				.request().accept(MediaType.APPLICATION_JSON).get()
 				.readEntity(listm);
 
